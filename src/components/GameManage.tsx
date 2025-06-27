@@ -4,6 +4,7 @@ import { Button } from "../shared/button";
 import { Separator } from "../shared/separator";
 import { Input } from "../shared/input";
 import { useSharedBasketballState } from "../hooks/useSharedBasketballState";
+import { Link } from "react-router-dom";
 
 export const GameManage = () => {
   const [gameState, updateGameState] = useSharedBasketballState();
@@ -216,6 +217,19 @@ export const GameManage = () => {
               <Button onClick={() => updateGameState({ shotClock: 12 })}>
                 Reset Shot Clock
               </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="lg:col-span-2">
+            <CardContent className="p-4 flex flex-col gap-10 items-center">
+              <h2 className="text-xl font-semibold mb-2">Game Screens</h2>
+
+              <Link to="/game-overview" target="_blank">
+                <Button>Game overview</Button>
+              </Link>
+              <Link to="/game-shoot-clock" target="_blank">
+                <Button>Shoot clock</Button>
+              </Link>
             </CardContent>
           </Card>
         </div>
