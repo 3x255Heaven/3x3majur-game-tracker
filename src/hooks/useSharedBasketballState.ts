@@ -51,11 +51,19 @@ export function useSharedBasketballState(): [
     };
   }, []);
 
-  const updateState = (partialUpdate: Partial<GameState>) => {
-    const newState = { ...state, ...partialUpdate };
-    setState(newState);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
-    channelRef.current?.postMessage(newState);
+  const updateState = (
+    partialUpdate: Partial<GameState> | ((prev: GameState) => GameState)
+  ) => {
+    setState((prev) => {
+      const newState =
+        typeof partialUpdate === "function"
+          ? partialUpdate(prev)
+          : { ...prev, ...partialUpdate };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
+      channelRef.current?.postMessage(newState);
+      return newState;
+    });
   };
 
   return [state, updateState];

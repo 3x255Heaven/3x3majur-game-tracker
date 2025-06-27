@@ -24,10 +24,11 @@ export const GameManage = () => {
     let interval: number;
     if (running && gameClock > 0) {
       interval = setInterval(() => {
-        updateGameState({
-          gameClock: Math.max(gameClock - 1, 0),
-          shotClock: Math.max(shotClock - 1, 0),
-        });
+        updateGameState((prev) => ({
+          ...prev,
+          gameClock: Math.max(prev.gameClock - 1, 0),
+          shotClock: Math.max(prev.shotClock - 1, 0),
+        }));
       }, 1000);
     }
     return () => clearInterval(interval);
