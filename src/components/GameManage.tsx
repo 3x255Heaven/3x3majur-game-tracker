@@ -24,7 +24,7 @@ export const GameManage = () => {
     let interval: number;
     if (running && gameClock > 0) {
       interval = setInterval(() => {
-        updateGameState((prev) => ({
+        updateGameState((prev: any) => ({
           ...prev,
           gameClock: Math.max(prev.gameClock - 1, 0),
           shotClock: Math.max(prev.shotClock - 1, 0),

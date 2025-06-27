@@ -26,10 +26,7 @@ const defaultState: GameState = {
   running: false,
 };
 
-export function useSharedBasketballState(): [
-  GameState,
-  (state: Partial<GameState>) => void
-] {
+export function useSharedBasketballState(): [GameState, (state: any) => void] {
   const [state, setState] = useState<GameState>(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored ? JSON.parse(stored) : defaultState;
@@ -52,7 +49,7 @@ export function useSharedBasketballState(): [
   }, []);
 
   const updateState = (
-    partialUpdate: Partial<GameState> | ((prev: GameState) => GameState)
+    partialUpdate: any | ((prev: GameState) => GameState)
   ) => {
     setState((prev) => {
       const newState =
